@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./data.js"></script>
+    <title>Document</title>
+    
+</head>
+
+<body>
+    <header><h3>Vue template 익숙해지기</h3></header>
+
+    <main id="app">
+        <div>
+            <li v-for="scholar in jsonData">
+                {{scholar.name}} : {{scholar.introduction}} : {{scholar.img}}
+            </li>
+        </div>
+    </main>
+
+    <script>
+        const {createApp, ref} = Vue;
+        createApp({
+            setup() {
+                const jsonData = ref(scholar);
+                return {
+                    jsonData
+                }
+            }
+        }).mount("#app");
+
+    </script>
+</body>
+
+</html>
