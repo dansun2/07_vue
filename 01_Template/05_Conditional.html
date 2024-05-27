@@ -7,6 +7,11 @@
     <title>Document</title>
 </head>
 <body>
+    <!--
+        v-if
+        지시문은 v-if 조건부로 블록을 렌더링하는데 사용된다.
+        지시자의 식이 참값을 반환하는 경우에만 블록이 렌더링된다.
+    -->
     <div id="step01">
         <div v-if="isTrue">
             <p>참인경우</p>
@@ -15,14 +20,34 @@
             <p>참이 아닌 경우</p>
         </div>
         <hr>
+        <div v-if="truthy">
+            <p>{{truthy}}</p>
+        </div>
+        <div v-if="!falsy">
+            <p>falsy</p>
+        </div>
     </div>
+    <hr>
+
+    <!--
+        V-if & v-else-if & v-else
+        if 조건부로 블록을 렌더링 하는데 지시자의 식이 참인 경우 if 블록을 렌더링하게 된다.
+        그러나 if 블록의 지시자의 식이 참이 아닌 경우 else 블록이 렌더링된다.
+    -->
+    <div id="step02">
+        <h1 v-if="awesome === 'awesome'"> Vue is awesome! </h1>
+        <h1 v-else-if="awesome === 'good'">hello</h1>
+        <h1 v-else>Oh No </h1>
+        <button @click=""setToggle">toggle</button>
+    </div>
+
 
     <script>
         const {createApp, ref} = Vue
 
         createApp({
             setup(){
-                const isTrue = ref(false);
+                const isTrue = ref(true);
                 const truthy = ref("Truthy");
                 const falsy = ref("");
                 return {
