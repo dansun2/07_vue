@@ -14,5 +14,41 @@
         <div v-bind:id="dynamicId">{{value}}</div>
         <div :id="skipId">{{skipValue}}</div>
     </div>
+    <br>
+    <div id="step02">
+        <h5>비활성화</h5>
+        <input : disabled="isTrue" :value="isTure"/>
+        <br>
+        <button @click="activation">{{isTrue}}</button>
+    </div>
+    <script>
+        const {createApp, ref} = Vue
+        createApp({
+            setup(){
+                const dynamicId = ref("vue");
+                const value = ref("test");
+                const skipId = ref("skipId");
+                const skipValue = ref("skipValue");
+                return{
+                    dynamicId, value, skipId, skipValue
+                }
+            }
+        }).mount("#step01")
+
+        createApp({
+            setup(){
+                const isTrue = ref(false);
+                const activation = () => {
+                    console.log(isTure.value);
+                    isTrue.value = !isTrue.value;
+                }
+
+                return{
+                    isTrue,
+                    activation
+                }
+            }
+        })
+    </script>
 </body>
 </html>
