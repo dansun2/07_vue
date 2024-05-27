@@ -20,6 +20,8 @@
         <input : disabled="isTrue" :value="isTure"/>
         <br>
         <button @click="activation">{{isTrue}}</button>
+        <hr>
+        <input :disabled="test" :value
     </div>
     <script>
         const {createApp, ref} = Vue
@@ -37,18 +39,28 @@
 
         createApp({
             setup(){
+                // 반응성 변수는 반응성 시스템에서 관리하기 때문에 속성의 값을 변경해야 한다.
                 const isTrue = ref(false);
-                const activation = () => {
-                    console.log(isTure.value);
+                const activation = () =>{
+                    console.log(isTrue.value);
                     isTrue.value = !isTrue.value;
                 }
+                
+                // 일반 const 변수는 상태 변경이 불가능하다.
+                const test = true;
+                const testAction = () =>{
+                    test = !test;
+                }
+
+                let test1 = true;
+                const testAc
 
                 return{
                     isTrue,
                     activation
                 }
             }
-        })
+        }).mount("#stpe02");
     </script>
 </body>
 </html>
