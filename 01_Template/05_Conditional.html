@@ -7,6 +7,31 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div id="step01">
+        <div v-if="isTrue">
+            <p>참인경우</p>
+        </div>
+        <div v-if="!isTrue">
+            <p>참이 아닌 경우</p>
+        </div>
+        <hr>
+    </div>
+
+    <script>
+        const {createApp, ref} = Vue
+
+        createApp({
+            setup(){
+                const isTrue = ref(false);
+                const truthy = ref("Truthy");
+                const falsy = ref("");
+                return {
+                    isTrue,
+                    truthy,
+                    falsy
+                }
+            }
+        }).mount("#step01")
+    </script>
 </body>
 </html>
