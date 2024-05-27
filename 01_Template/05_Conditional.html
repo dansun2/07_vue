@@ -97,11 +97,24 @@
         createApp({
             setup(){
                 const isTrue = ref(true);
-                retrun{
+                return{
                     isTrue
                 }
             }
         }).mount("#step03")
+
+        createApp({
+            setup(){
+                const state = ref(true);
+                function setState(){
+                    state.value = !state.value;
+                }
+                return{
+                    state,
+                    setState
+                }
+            }
+        }).mount("#step04")
     
     </script>
 </body>
