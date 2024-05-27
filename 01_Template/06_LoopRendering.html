@@ -43,9 +43,26 @@
         <template v-for="item in items">
             <li>인기 : {{item}}</li>
         </template>
+        <ul v-for="item in items">
+            <li>인기 : {{item}}</li>
+        </ul>
+        <li v-for="item in items">{{item}}</li>
     </div>
     <hr>
 
+    <div id="step05">
+        <!--
+            v-for과 v-if가 같은 노드에 존재하면 v-for보다 v-if이 높은 우선 순위를 가진다.
+            이것은 v-for에서 item in items 에서 item을 v-if에서 참조할 수 없다는 것으로
+            다음과 같이 작성하면 오류가 발생한다.
+        -->
+        <!-- <li v-for="item in items" v-if="item.state">{{item.name}}</li> -->
+        <template v-for="item in items">
+            <li v-if="item.state">
+                {{item.name}}
+            </li>
+        </template>
+    </div>
     <script>
         const { createApp, ref, reactive } = Vue;
 
