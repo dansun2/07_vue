@@ -12,6 +12,12 @@
         <br>
         <label>name={{name}}</label>
     </div>
+    <hr>
+    <div id="step02">
+        <div v-for="item in todos" ref="todolist">
+            <label> title: {{item.title}}</label>
+        </div>
+    </div>
 
     <script>
         const {createApp, ref, reactive} = Vue
@@ -27,6 +33,37 @@
                 this.$refs.nameBox.focus();
             }
         }).mount("#step01");
+
+        createApp({
+            setup() {
+                const todos = ref([
+                    {
+                        "title": "delectus aut autem",
+                    },
+                    {
+                        "title": "quis ut nam facilis et officia qui",
+                    },
+                    {
+                        "title": "fugiat veniam minus",
+                    },
+                    {
+                        "title": "et porro tempora",
+                    },
+                    {
+                        "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
+                    }]);
+
+                // const todolist = reactive({});
+
+                return {
+                    todos,
+                    // todolist
+                }
+            },
+            mounted() {
+                this.$ref.todolist.map(todo => console.log(todo.innerText))
+            }
+        }).mount("#step02");
     </script>
 </body>
 </html>
