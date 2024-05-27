@@ -53,7 +53,7 @@
     <div id="step05">
         <!--
             v-for과 v-if가 같은 노드에 존재하면 v-for보다 v-if이 높은 우선 순위를 가진다.
-            이것은 v-for에서 item in items 에서 item을 v-if에서 참조할 수 없다는 것으로
+            이것은 v-for의 item in items 에서 item을 v-if에서 참조할 수 없다는 것으로
             다음과 같이 작성하면 오류가 발생한다.
         -->
         <!-- <li v-for="item in items" v-if="item.state">{{item.name}}</li> -->
@@ -63,6 +63,24 @@
             </li>
         </template>
     </div>
+
+    <div id="step06">
+        <!--
+            :key - 상태유지(Maintaning State with)
+            vue가 렌더링된 요소 목록을 업데이트 할 때 v-for는 기본적으로 인플레이스 패치 전략을 사용하게 된다.
+            데이터 항목의 순서가 변경된 경우 dom 요소를 항목의 순서에 맞게 이동하는 대신 vue는 각 요소를 제자리에 패치하고
+            해당 인덱스에서 렌더링해야하는 내용을 반영한다.
+            이 때 vue가 각 노드의 id를 추적할 수 있도록 힌트를 주고 기존 요소를 재사용하여 순서를 변경할 수 있도록 고유한 정보를 제공해야 하는데 이 때 사용ㅇ하는 것이 key이다.
+
+            인플레이스 패치란
+            소프트웨어 또는 시스템을 업데이트 하는 방법 중 하나이다.
+            기존 소프트웨어를 제거하지 않고 직접 수정하여 업데이트를 적용하는 것을 의미한다.
+        -->
+        <div v-for="item in items" :key="item.id">
+            {{item.id}} - {{item.name}}
+        </div>
+    </div>
+
     <script>
         const { createApp, ref, reactive } = Vue;
 
@@ -108,6 +126,15 @@
                 }
             }
         }).mount("#step05")
+
+        createApp({
+            setup() {
+                const items = ref([{id:0, name:"apple"}, {id:1, name:"Pineapple"}, {id:2,name:"Melon"}]);
+                return {
+                    items
+                }
+            }
+        }).mount("#step06")
     </script>
 </body>
 
