@@ -31,6 +31,20 @@
             <li v-for="(value, key, index) in profile"> {{index}} : {{key}} : {{value}}</li>
         </ol>
     </div>
+    <hr>
+
+    <div id="step03">
+        <li v-for="n in 10">{{n}}</li>
+    </div>
+
+    <hr>
+
+    <div id="step04">
+        <template v-for="item in items">
+            <li>인기 : {{item}}</li>
+        </template>
+    </div>
+    <hr>
 
     <script>
         const { createApp, ref, reactive } = Vue;
@@ -56,7 +70,27 @@
                     profile
                 }
             }
-        }).mount("#step02")
+        }).mount("#step02");
+
+        createApp().mount("#step03")
+
+        createApp({
+            setup() {
+                const items = ref(["apple", "Pineapple", "Melon", "Watermelon"]);
+                return {
+                    items
+                }
+            }
+        }).mount("#step04")
+
+        createApp({
+            setup() {
+                const items = ref([{name:"apple", state:true}, {name:"Pineapple", state:false}, {name:"Melon", state:true},{name:"Melon", state:false}]);
+                return {
+                    items
+                }
+            }
+        }).mount("#step05")
     </script>
 </body>
 
