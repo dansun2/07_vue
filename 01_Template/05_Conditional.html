@@ -38,9 +38,27 @@
         <h1 v-if="awesome === 'awesome'"> Vue is awesome! </h1>
         <h1 v-else-if="awesome === 'good'">hello</h1>
         <h1 v-else>Oh No </h1>
-        <button @click=""setToggle">toggle</button>
+        <button @click="setToggle">toggle</button>
     </div>
+    <hr>
 
+    <!--
+        v-if 는 조건에 따라 특정 요소를 렌더링하거나 제거하는데 사용된다.
+        그러나 요소를 렌더링하는 과정에 요소들을 감싸주는 부모가 필요하지 않을 수 있다.
+        이러한 경우 Template를 이용하여 부모가 요소가 없이 요소들을 그룹화 하는 것이 가능해진다.
+    -->
+
+    <div id="step03">
+        <template v-if="isTrue">
+            <h1>awesome</h1>
+            <h1>good</h1>
+        </template>
+    </div>
+    
+    <div id="step04">
+        <h1 v-show="state">hellow</h1>
+        <button @click="setState">{{state}}</button>
+    </div>
 
     <script>
         const {createApp, ref} = Vue
@@ -57,6 +75,34 @@
                 }
             }
         }).mount("#step01")
+
+        createApp({
+            setup(){
+                const awesome = ref("awesome");
+                const count = ref(1);
+                function setToggle(){
+                    const options = ["awesome", "good", "not good"];
+                    const optionIndex = count.value & options.length;
+                    awesome.value = options[optionIndex];
+                    count.value++;
+                }
+                return{
+                    awesome,
+                    setToggle
+                }
+            
+            }
+        }).mount("#step02")
+
+        createApp({
+            setup(){
+                const isTrue = ref(true);
+                retrun{
+                    isTrue
+                }
+            }
+        }).mount("#step03")
+    
     </script>
 </body>
 </html>
