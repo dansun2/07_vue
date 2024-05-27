@@ -7,6 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h3>속성 바인딩</h3>
+    <hr>
+    <div id="step01">
+        <h5> bind 구문 </h5>
+        <div v-bind:id="dynamicId">{{value}}</div>
+        <div :id="skipId">{{skipValue}}</div>
+    </div>
 </body>
 </html>
