@@ -6,39 +6,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="./data.js"></script>
-    <title>Document</title>
+    <title>Vue</title>
 </head>
 
+<style>
+    .character {
+        border: 2px solid black;
+        width: 300px;
+        height: 300px;
+        overflow: hidden;
+    }
+
+
+    .imgContainer {
+        display: flex;
+        justify-content: center;
+    }
+
+    .imgContainer img {
+
+        width: 50%;
+        height: 50%;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .skill {
+        border: 2px solid black;
+        width: 300px;
+        height: 300px;
+        overflow: hidden;
+    }
+
+
+    .imgsContainer {
+        display: flex;
+        justify-content: center;
+    }
+
+    .imgsContainer img {
+
+        width: 50%;
+        height: 50%;
+    }
+
+    .container2 {
+        display: flex;
+        flex-direction: row;
+    }
+</style>
+
 <body>
+
     <div id="app">
         <header>
-            <h1>Vue Template 이벤트 적용</h1>
-            {{character}}
-            <div>
-                <div v-for="item in data" :key="item.id">
+            <h1> vue template 이벤트 적용</h1>
+            <button @click="show">{{characterShow ? 'showSkill' : 'showCharacter' }}</button>
+            
 
-                    {{skill}}
-                    <h5>이름 : {{item.skill}}</h5>
-                    <p>{{item.list}}</p>
+            <div v-if="characterShow" class="container">
+                <div v-for="item in character" :key="item.id" class="character">
+                    <h5>이름 : {{item.name}}</h5>
                     <p>{{item.introduction}}</p>
-                    <div class="imgsContainer">
-                        <img src="item.imgs">
+                    <div class="imgContainer">
+                        <img :src=item.img />
                     </div>
-                    
                 </div>
             </div>
+
+            <div v-else="skillShow" class="container2">
+                <div v-for="item in skill" :key="item.id" class="skill">
+                    <h5>Skill : {{item.skill}}</h5>
+                    <!-- <p>{{item.list}}</p> -->
+                    <p>{{item.introduction}}</p>
+                    <div class="imgsContainer">
+                        <img :src=item.imgs />
+                    </div>
+                </div>
+            </div>
+
         </header>
+
+
     </div>
+
     <script>
         const { createApp, ref, reactive } = Vue;
 
         createApp({
+
             setup() {
-                const character = scholar;
-                const skill = msaSkill;
+                const character = reactive(scholar);
+                const skill = reactive(msaSkill);
+                const characterShow = ref(true);
+            
+
+                // function showCharacter(){
+                //     characterShow.value = true;
+                //     skillShow.value = false;
+                // }
+
+                
+                // function showSkill(){
+                //     characterShow.value = false;
+                //     skillShow.value = true;
+                // }
+
+                function show(){
+                    characterShow.value = !characterShow.value;
+                }
+
+            
+
                 return {
                     character,
-                    skill
+                    skill,
+                    characterShow,
+                    show
                 }
             }
         }).mount("#app");
