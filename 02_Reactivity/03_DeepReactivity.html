@@ -46,6 +46,7 @@
                 const totalPrice = ref(0);
 
                 const addProduct = (product) =>{
+                    console.log(basket)
                     basket.value.push(product.name);
                     totalPrice.value += product.price;
                 }
