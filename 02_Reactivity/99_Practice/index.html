@@ -42,21 +42,7 @@
     }
 
 
-    .imgsContainer {
-        display: flex;
-        justify-content: center;
-    }
 
-    .imgsContainer img {
-
-        width: 50%;
-        height: 50%;
-    }
-
-    .container2 {
-        display: flex;
-        flex-direction: row;
-    }
 </style>
 
 <body>
@@ -65,7 +51,7 @@
         <header>
             <h1> vue template 이벤트 적용</h1>
             <button @click="show">{{characterShow ? 'showSkill' : 'showCharacter' }}</button>
-            
+
 
             <div v-if="characterShow" class="container">
                 <div v-for="item in character" :key="item.id" class="character">
@@ -77,20 +63,17 @@
                 </div>
             </div>
 
-            <div v-else="skillShow" class="container2">
+            <div v-else="skillShow" class="container">
                 <div v-for="item in skill" :key="item.id" class="skill">
                     <h5>Skill : {{item.skill}}</h5>
                     <!-- <p>{{item.list}}</p> -->
-                    <p>{{item.introduction}}</p>
-                    <div class="imgsContainer">
-                        <img :src=item.imgs />
+                    <p>소개 : {{item.introduction}}</p>
+                    <div class="imgContainer" v-for="img in item.imgs">
+                        <img :src=img />
                     </div>
                 </div>
             </div>
-
         </header>
-
-
     </div>
 
     <script>
@@ -102,24 +85,24 @@
                 const character = reactive(scholar);
                 const skill = reactive(msaSkill);
                 const characterShow = ref(true);
-            
+
 
                 // function showCharacter(){
                 //     characterShow.value = true;
                 //     skillShow.value = false;
                 // }
 
-                
+
                 // function showSkill(){
                 //     characterShow.value = false;
                 //     skillShow.value = true;
                 // }
 
-                function show(){
+                function show() {
                     characterShow.value = !characterShow.value;
                 }
 
-            
+
 
                 return {
                     character,
