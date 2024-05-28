@@ -37,6 +37,19 @@
         </button>
     </div>
 
+    <div id="step04">
+        <button @keyup.enter="warn('이벤트 유형', $event)">
+            $Event
+        </button>
+
+        <button @click="(event)=>warn('이벤트 유형', event)">
+            ()=> event
+        </button>
+    </div>
+    <hr>
+
+    
+
     <script>
         const {createApp, ref} = Vue
 
@@ -84,6 +97,19 @@
                 }
             }
         }).mount("#step03");
+
+        createApp({
+            setup(){
+                function warn(message, event) {
+                    alert(message + " : " + event.type);
+                }
+
+                return{
+                    warn
+                }
+            }
+
+        }).mount("#step04")
     </script>
 </body>
 </html>
