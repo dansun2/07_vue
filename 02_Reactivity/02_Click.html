@@ -73,10 +73,24 @@
                 button 요소가 아닌 하위 다른 요소를 클릭하는 경우 이벤트를 억제한다.
             -->
             <div>
-                <button v-on:click="selfMethod">
-                    self<span>other</span> 
+                <button v-on:click.self="selfMethod">
+                    self<span> other</span> 
                 </button>
             </div>
+        </div>
+
+        <hr>
+        <div>
+            <button v-on:click.once="onceMethod">once</button>
+        </div>
+
+        <!--
+            이벤트 캡쳐링
+            부모 요소부터 자식 요소까지 이벤트가 전파되는 것을 의미한다.
+            버블링과 반대의 개념으로 생각하면 된다.
+        -->
+        <div @click.capture = "capture">
+            <div @click="capturing">내부요소</div>
         </div>
     </div>
 
@@ -168,11 +182,26 @@
                     alert("self")
                 }
 
+                function onceMethod(){
+                    alert("once");
+                }
+
+                function capture(){
+                    alert("부모요소 클릭")
+                }
+
+                function capturing(){
+                    alert("자식요소 클릭")
+                }
+
                 return {
                     dosomething,
                     bubbling,
                     bubblingEvent,
-                    selfMethod
+                    selfMethod,
+                    onceMethod,
+                    capture,
+                    capturing
                 }
             }
 
