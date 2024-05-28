@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="step01">
+        <p>todolist</p>
+        <input v-model="todos" placeholder="할 일을 입력하세요">
+        <button @click="addList">Todo-update</button>
+        <li v-for="list in lists" key="list">{{list}}</li>
+    </div>
+    
+    <script>
+        const {createApp, ref} = Vue;
+
+        createApp({
+            setup(){
+                const todos = ref("");
+                const lists = ref([]);
+                
+                const addList = () => {
+                    console.log(lists)
+                }
+                return{
+                    todos,
+                    lists,
+                    addList
+                }
+            }
+        }).mount("#step01");
+    </script>
+</body>
+</html>
