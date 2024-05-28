@@ -36,7 +36,7 @@
         /*
             reactive
             객체를 반응형으로 만들어 vue 템플릿에서 사용할 수 있도록 하는 유틸리티 함수이다.
-            반응형 객체는 속성값이 변경될 때 템플릿에 자동으로 반영바녕되며 ref는 단일 값에 대하여
+            반응형 객체는 속성값이 변경될 때 템플릿에 자동으로 반영되며 ref는 단일 값에 대하여
             반응성을 제공하지만 reactive는 객체를 반응형으로 만들어 템플릿에서 자동으로 반영하는 것이다.
 
             reactive의 특징
@@ -61,7 +61,7 @@
                 
                 */
                 function setRefState() {
-                    console.log(refstate)
+                    console.log(refstate);
                     refstate._rawValue.num++;
                 }
 
@@ -81,6 +81,34 @@
             }
 
         }).mount("#step01")
+
+        createApp({
+            setup(){
+                const check = {test:0};
+                const reactiveCheck = reactive(check);
+
+                function setCheck(){
+                    check.test++;
+                    console.log(check)
+                }
+
+                function setReactiveCheck(){
+                    reactiveCheck.test++;
+                }
+
+                function checkType(){
+                    console.log(check == reactiveCheck);
+                }
+
+                return {
+                    reactiveCheck,
+                    setCheck,
+                    checkType,
+                    setReactiveCheck
+                }
+            }
+
+        }).mount("#step02")
     </script>
 </body>
 
