@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,32 @@
     <script src="./data.js"></script>
     <title>Document</title>
 </head>
+
 <body>
     <div id="app">
-        {{character}}
-        <div>
-            {{skill}}
-        </div>
+        <header>
+            <h1>Vue Template 이벤트 적용</h1>
+            {{character}}
+            <div>
+                <div v-for="item in data" :key="item.id">
+
+                    {{skill}}
+                    <h5>이름 : {{item.skill}}</h5>
+                    <p>{{item.list}}</p>
+                    <p>{{item.introduction}}</p>
+                    <div class="imgsContainer">
+                        <img src="item.imgs">
+                    </div>
+                    
+                </div>
+            </div>
+        </header>
     </div>
     <script>
-        const {createApp, ref, reactive} = Vue;
+        const { createApp, ref, reactive } = Vue;
 
         createApp({
-            setup(){
+            setup() {
                 const character = scholar;
                 const skill = msaSkill;
                 return {
@@ -29,4 +44,5 @@
         }).mount("#app");
     </script>
 </body>
+
 </html>
