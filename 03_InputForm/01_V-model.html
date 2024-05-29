@@ -68,6 +68,23 @@
             <option value="pineapple">pineapple</option>
             <option value="grape">grape</option>
         </select>
+        <br>
+        <p>다중 선택 : {{fruits}}</p>
+        <select v-model="fruits" multiple>
+            <option value="apple">apple</option>
+            <option value="pineapple">pineapple</option>
+            <option value="grape">grape</option>
+        </select>
+    </div>
+
+    <div id="step05">
+        <p>과일 목록 : {{fruits}}</p>
+        <input type="checkbox" id="apple" name="check" value="apple" v-model="fruits"/>
+        <label for="app">apple</label>
+        <input type="checkbox" id="pineapple" name="check" value="pineapple" v-model="fruits"/>
+        <label for="app">pineapple</label>
+        <input type="checkbox" id="grape" name="check" value="grape" v-model="fruits"/>
+        <label for="app">grape</label>
     </div>
 
     <script>
@@ -123,9 +140,6 @@
                     console.log(selected.value);
                 }
                 
-                function check(){
-                    
-                }
 
                 return{
                     selected,
