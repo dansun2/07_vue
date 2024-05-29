@@ -98,7 +98,7 @@
                 <input v-model="characterInfo.name" />
 
                 <label>list : </label>
-                <input v-model="characterInfo.name" placeholder="기술 list는 ','로 구분해주세요." />
+                <input v-model="characterInfo.name" placeholder="기술 list는 ','로 구분해주세요." /> <!--스플릿떄문에 , 구분-->
 
                 <label>introduction : </label>
                 <input v-model="characterInfo.introduction" />
@@ -110,7 +110,7 @@
             <!-- {{characterInfo}} -->
             <button @click="pushHandler">등록</button>
         </div>
-        {{characters}}
+        <!-- {{characters}} -->
 
     </div>
 
@@ -127,6 +127,14 @@
                     name : "",
                     introduction : "",
                     img : ""
+                });
+                
+                const skillInfo = reactive({
+                    id : 0,
+                    skill : "",
+                    list : "", // 여기서 ""가 아니고 []로 쓰면 별도의 function이 필요
+                    introduction : "",
+                    imgs : [] // 근데 여기서는 이미지가 n개가 들어갈 수 있기 떄문에 []로 들어가야함
                 });
 
                 function pushHandler(){
@@ -149,6 +157,8 @@
                     type,
                     characterInfo,
                     characters, // 여기서는 값 확인을 위해 반환해줌
+                    skillInfo,
+
                     pushHandler,
 
 
