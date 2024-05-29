@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> <!-- vue.js 라이브러리 로드 -->
+    <script src="./data.js"></script> <!-- 외부 데이터 파일 로드 -->
+    <title>Vue</title>
+</head>
+
+<style>
+    .character {
+        border: 2px solid black;
+        width: 300px;
+        height: 300px;
+        overflow: hidden;
+    }
+
+
+    .imgContainer {
+        display: flex;
+        justify-content: center;
+    }
+
+    .imgContainer img {
+
+        width: 50%;
+        height: 50%;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .skill {
+        border: 2px solid black;
+        width: 300px;
+        height: 300px;
+        /* overflow: hidden; */
+    }
+
+    .container2 {
+        border: 2px solid black;
+        width: 40%;
+        height: 50%;
+
+    }
+</style>
+
+<body>
+
+    <div id="app">
+        <header>
+            <h1> vue template 이벤트 적용</h1>
+
+            <div v-if="state">
+                <button @click="show">{{characterShow ? 'showSkill' : 'showCharacter' }}</button>
+            </div>
+
+            <div v-else>
+                <button @click="add">{{addPage ? '등록하기' : '조회하기'}}</button>
+            </div>
+
+
+            <!-- 인물소개와 스킬페이지 -->
+            <div v-if="addPage">
+
+                <!-- 인물소개 -->
+                <div v-if="characterShow" class="container">
+                    <div v-for="item in character" :key="item.id" class="character">
+                        <h5>이름 : {{item.name}}</h5>
+                        <p>{{item.introduction}}</p>
+                        <div class="imgContainer">
+                            <img :src=item.img />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 스킬소개 -->
+                <div v-else="skillShow" class="container">
+                    <div v-for="item in skill" :key="item.id" class="skill">
+                        <h5>Skill : {{item.skill}}</h5>
+                        <!-- <p>{{item.list}}</p> -->
+                        <p>소개 : {{item.introduction}}</p>
+                        <div class="imgContainer" v-for="img in item.imgs">
+                            <img :src=img />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 등록페이지 -->
+            <div v-else>
+                <select v-model="selected" @change="check" class="container2">
+                    <option value="chaAdd">인물등록</option>
+                    <option value="skillAdd">스킬등록</option>
+                </select>
+
+                <div v-if class="container2">
+                    <div>
+                        <label>name : </label><br><input v-model="name" />
+                        <br><br>
+                        <label>introduction : </label><br><input v-model="introduction" />
+                        <br><br>
+                        <label>img : </label><br><input type="file" v-model="img" />
+                        <br>
+                    </div>
+                </div>
+
+                <div v-else class="container2">
+                    <label>name : </label><br><input v-model="skill" />
+                    <br><br>
+                    <label>introduction : </label><br><input v-model="list" />
+                    <br><br>
+                    <label>introduction : </label><br><input v-model="introduction" />
+                    <br><br>
+                    <label>img : </label><br><input type="file" v-model="img" />
+                    <br>
+                </div>
+            </div>
+
+
+        </header>
+    </div>
+
+    <script>
+        const { createApp, ref, reactive } = Vue;
+
+        createApp({
+
+            setup() {
+                const character = reactive(scholar);
+                const skill = reactive(msaSkill);
+                const characterShow = ref(true);
+                const addPage = ref(true);
+
+                function show() {
+                    characterShow.value = !characterShow.value;
+                }
+
+                function add() {
+                    addPage.value = !addPage.value;
+                }
+
+                function state() {
+                    state.value = !state.value;
+                }
+
+
+
+                return {
+                    character,
+                    skill,
+                    characterShow,
+                    addPage,
+                    show,
+                    add,
+                    state
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
