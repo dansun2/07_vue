@@ -95,16 +95,19 @@
 
             <div v-else class="inputBox">
                 <label>skill : </label>
-                <input v-model="characterInfo.name" />
+                <input v-model="skillInfo.skill" />
 
                 <label>list : </label>
-                <input v-model="characterInfo.name" placeholder="기술 list는 ','로 구분해주세요." /> <!--스플릿떄문에 , 구분-->
+                <input v-model="skillInfo.list" placeholder="기술 list는 ','로 구분해주세요." /> <!--스플릿떄문에 , 구분-->
 
                 <label>introduction : </label>
-                <input v-model="characterInfo.introduction" />
+                <input v-model="skillInfo.introduction" />
 
                 <label>img : </label>
-                <input v-model="characterInfo.img" />
+                <template v-for="index in imgCnt">
+                    <input v-model="skillInfo.imgs[index-1]" />
+                </template>
+                <button @clikc="imgCnt++">이미지추가</button>
             </div>
 
             <!-- {{characterInfo}} -->
@@ -118,46 +121,48 @@
         const { createApp, ref, reactive } = Vue;
 
         createApp({
-            setup(){ // vue에서 초기데이터 설정
+            setup() { // vue에서 초기데이터 설정
                 const type = ref("character");
                 const characters = ref([]); // 반복할때 배열이 가장 다루기 쉬우니까 and 값이 여러개니까
-                
+                const imgCnt = ref(1);
+
                 const characterInfo = reactive({
-                    id : 0,
-                    name : "",
-                    introduction : "",
-                    img : ""
-                });
-                
-                const skillInfo = reactive({
-                    id : 0,
-                    skill : "",
-                    list : "", // 여기서 ""가 아니고 []로 쓰면 별도의 function이 필요
-                    introduction : "",
-                    imgs : [] // 근데 여기서는 이미지가 n개가 들어갈 수 있기 떄문에 []로 들어가야함
+                    id: 0,
+                    name: "",
+                    introduction: "",
+                    img: ""
                 });
 
-                function pushHandler(){
+                const skillInfo = reactive({
+                    id: 0,
+                    skill: "",
+                    list: "", // 여기서 ""가 아니고 []로 쓰면 별도의 function이 필요
+                    introduction: "",
+                    imgs: [] // 근데 여기서는 이미지가 n개가 들어갈 수 있기 떄문에 []로 들어가야함
+                });
+
+                function pushHandler() {
                     // 유효성검사 (밸리데이션)
-                    if(!characterInfo.name){
+                    if (!characterInfo.name) {
                         return;
                     }
-                    if(!characterInfo.introduction){
+                    if (!characterInfo.introduction) {
                         return;
                     }
-                    if(!characterInfo.img){
+                    if (!characterInfo.img) {
                         return;
                     }
                     characterInfo.id = characters.value.length;
 
-                    characters.value.push({...characterInfo}); // 캐릭터인포의 속성들을 열거해주는 스프레드 연산자
+                    characters.value.push({ ...characterInfo }); // 캐릭터인포의 속성들을 열거해주는 스프레드 연산자
                 }
 
-                return{
+                return {
                     type,
                     characterInfo,
                     characters, // 여기서는 값 확인을 위해 반환해줌
                     skillInfo,
+                    imgCnt,
 
                     pushHandler,
 
