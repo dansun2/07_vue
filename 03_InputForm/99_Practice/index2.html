@@ -76,23 +76,66 @@
 <body>
     <div id="app">
 
+        <!-- 등록 폼 -->
         <div class="inputContainer">
             <select v-model="type" name="" id="">
-                <option>인물등록</option>
-                <option>스킬등록</option>
+                <option value="character">인물등록</option>
+                <option value="skill">스킬등록</option>
             </select>
+            <div class="inputBox">
+                <label>name : </label>
+                <input v-model="characterInfo.name" />
+
+                <label>introduction : </label>
+                <input v-model="characterInfo.introduction" />
+
+                <label>img : </label>
+                <input v-model="characterInfo.img" />
+            </div>
+            <!-- {{characterInfo}} -->
+            <button @click="pushHandler">등록</button>
         </div>
+        {{characters}}
+
     </div>
 
     <script>
-        const { createApp, ref } = Vue;
+        const { createApp, ref, reactive } = Vue;
 
         createApp({
             setup(){ // vue에서 초기데이터 설정
-                const type = ref();
+                const type = ref("character");
+                const characters = ref([]); // 반복할때 배열이 가장 다루기 쉬우니까 and 값이 여러개니까
+                
+                const characterInfo = reactive({
+                    id : 0,
+                    name : "",
+                    introduction : "",
+                    img : ""
+                });
+
+                function pushHandler(){
+                    // 유효성검사 (밸리데이션)
+                    if(!characterInfo.name){
+                        return;
+                    }
+                    if(!characterInfo.introduction){
+                        return;
+                    }
+                    if(!characterInfo.img){
+                        return;
+                    }
+                    characterInfo.id = characters.value.length;
+                    
+                    characters.value.push({...characterInfo}); // 캐릭터인포의 속성들을 열거해주는 스프레드 연산자
+                }
 
                 return{
-                    type
+                    type,
+                    characterInfo,
+                    characters, // 여기서는 값 확인을 위해 반환해줌
+                    pushHandler,
+
 
                 }
             }
