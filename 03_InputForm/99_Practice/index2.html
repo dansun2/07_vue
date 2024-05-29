@@ -82,7 +82,7 @@
                 <option value="character">인물등록</option>
                 <option value="skill">스킬등록</option>
             </select>
-            <div class="inputBox">
+            <div v-if="type === 'character'" class="inputBox">
                 <label>name : </label>
                 <input v-model="characterInfo.name" />
 
@@ -92,6 +92,21 @@
                 <label>img : </label>
                 <input v-model="characterInfo.img" />
             </div>
+
+            <div v-else class="inputBox">
+                <label>skill : </label>
+                <input v-model="characterInfo.name" />
+
+                <label>list : </label>
+                <input v-model="characterInfo.name" placeholder="기술 list는 ','로 구분해주세요." />
+
+                <label>introduction : </label>
+                <input v-model="characterInfo.introduction" />
+
+                <label>img : </label>
+                <input v-model="characterInfo.img" />
+            </div>
+
             <!-- {{characterInfo}} -->
             <button @click="pushHandler">등록</button>
         </div>
@@ -126,7 +141,7 @@
                         return;
                     }
                     characterInfo.id = characters.value.length;
-                    
+
                     characters.value.push({...characterInfo}); // 캐릭터인포의 속성들을 열거해주는 스프레드 연산자
                 }
 
