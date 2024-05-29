@@ -27,10 +27,65 @@
         변경하는 것은 매우 번거로운 작업이 될 것이다.
     -->
 
-    <div id="stsep01">
+    <div id="step01">
         <label>이름 : </label><input v-bind:value="text" v-on:input="event => inputText(event)"/>
         <br>
         <label>주소 : </label><input v-bind:value="text" v-on:input="inputText($event)"/>
     </div>
+
+    <br>
+
+    <div id="step02">
+        <div>
+            <h4>name : {{name}}</h4>
+            <h4>address : {{address}}</h4>
+            <h4>age : {{age}}</h4>
+            <h4>introduce : {{introduce}}</h4>
+        </div>
+        <label>이름 : </label><input v-model="name"/>
+        <br>
+        <label>주소 : </label><input v-model="address"/>
+        <br>
+        <label>나이 : </label><input v-model="age"/>
+        <br>
+        <label>자기소개 : </label><input v-model="introduce"/>
+    </div>
+
+    <script>
+        const {createApp, ref, reactive} = Vue;
+
+        createApp({
+            setup(){
+                const text = ref("");
+
+                function inputText(event) {
+                    text.value = event.target.value;
+                    console.log('-------------');
+                    console.log(text.value);
+                }
+
+                return{
+                    text,
+                    inputText
+                }
+            }
+        }).mount("#step01");
+
+        createApp({
+            setup(){
+                const name = ref("");
+                const address = ref("");
+                const age = ref("");
+                const introduce = ref("");
+                return {
+                    name,
+                    address,
+                    age,
+                    introduce
+                }
+            }
+
+        }).mount("#step02");
+    </script>
 </body>
 </html>
