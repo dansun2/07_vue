@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+    <style>
+        div{
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        .custom-input input{
+            width: 200px;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+        
+    </style>
+</head>
+<body>
+    <!--
+        V-model - intro
+        프론트엔드에서 양식을 다룰 때, 자바스크립트에서 양식 입력 요소의 상태를 해당 상태와
+        동기화해야 하는 경우가 있다. 이때 값 바인딩을 수동으로 처리하고 이벤트 수신을 통해
+        변경하는 것은 매우 번거로운 작업이 될 것이다.
+    -->
+
+    <div id="stsep01">
+        <label>이름 : </label><input v-bind:value="text" v-on:input="event => inputText(event)"/>
+        <br>
+        <label>주소 : </label><input v-bind:value="text" v-on:input="inputText($event)"/>
+    </div>
+</body>
+</html>
