@@ -41,11 +41,16 @@
         /* overflow: hidden; */
     }
 
-    .container2 {
-        border: 2px solid black;
-        width: 40%;
-        height: 50%;
 
+    .container2 {
+        border: 1px solid black;
+        padding: 5px;
+    }
+
+    .custom-input input {
+        width: 200px;
+        padding: 5px;
+        border: 1px solid #ccc;
     }
 </style>
 
@@ -55,12 +60,10 @@
         <header>
             <h1> vue template 이벤트 적용</h1>
 
+            <!-- 삼항연산자로 버튼 스위칭 -->
             <div v-if="state">
-                <button @click="show">{{characterShow ? 'showSkill' : 'showCharacter' }}</button>
-            </div>
-
-            <div v-else>
                 <button @click="add">{{addPage ? '등록하기' : '조회하기'}}</button>
+                <button @click="show">{{characterShow ? 'showSkill' : 'showCharacter' }}</button>
             </div>
 
 
@@ -93,32 +96,43 @@
 
             <!-- 등록페이지 -->
             <div v-else>
-                <select v-model="selected" @change="check" class="container2">
-                    <option value="chaAdd">인물등록</option>
-                    <option value="skillAdd">스킬등록</option>
+                <!-- 인물등록/스킬등록 고르기 -->
+                <select v-model="selected" class="container2">
+                    <option value='chaAdd'>인물등록</option>
+                    <option value='skillAdd'>스킬등록</option>
                 </select>
 
-                <div v-if class="container2">
-                    <div>
-                        <label>name : </label><br><input v-model="name" />
+                <!-- 인물등록박스 -->
+                <div v-if="selected === 'chaAdd'">
+                    <div class="container2">
+                        <label>name : </label><br><input type="text" v-model="name2" />
+                        <br><br>
+                        <label>introduction : </label><br><input type="text" v-model="introduction" />
+                        <br><br>
+                        <label>img : </label><br><input type="file" v-model="img" />
+                        <br>
+                        
+                        <button @click="addListCha">등록하기</button>
+                    </div>
+                </div>
+
+                <!-- 스킬등록박스 -->
+                <div v-else-if="selected === 'skillAdd'">
+                    <div class="container2">
+                        <label>name : </label><br><input v-model="name2" />
+                        <br><br>
+                        <label>introduction : </label><br><input v-model="list" placeholder="기술 list는 ','로 구분해주세요." />
                         <br><br>
                         <label>introduction : </label><br><input v-model="introduction" />
                         <br><br>
                         <label>img : </label><br><input type="file" v-model="img" />
                         <br>
+
+                        <button @click="addListSkill">등록하기</button>
                     </div>
                 </div>
 
-                <div v-else class="container2">
-                    <label>name : </label><br><input v-model="skill" />
-                    <br><br>
-                    <label>introduction : </label><br><input v-model="list" />
-                    <br><br>
-                    <label>introduction : </label><br><input v-model="introduction" />
-                    <br><br>
-                    <label>img : </label><br><input type="file" v-model="img" />
-                    <br>
-                </div>
+
             </div>
 
 
@@ -135,11 +149,18 @@
                 const skill = reactive(msaSkill);
                 const characterShow = ref(true);
                 const addPage = ref(true);
+                const chaAdd = ref();
+                const skillAdd = ref();
+                const selected = ref("chaAdd");
+                const addListCha = reactive();
+                const addListSkill = reactive();
 
+                //  인물보기/스킬보기 값 전환 
                 function show() {
                     characterShow.value = !characterShow.value;
                 }
 
+                // 등록페이지/조회페이지 값 전환 
                 function add() {
                     addPage.value = !addPage.value;
                 }
@@ -148,6 +169,16 @@
                     state.value = !state.value;
                 }
 
+                // function addListCha () {
+                    
+                // }
+
+                // function addListSkill {
+
+                // }
+
+
+
 
 
                 return {
@@ -155,9 +186,13 @@
                     skill,
                     characterShow,
                     addPage,
+                    selected,
                     show,
                     add,
-                    state
+                    state,
+                    addListCha,
+                    addListSkill
+
                 }
             }
         }).mount("#app");
