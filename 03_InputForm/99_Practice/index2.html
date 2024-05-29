@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> <!-- vue.js 라이브러리 로드 -->
+    <script src="./data.js"></script> <!-- 외부 데이터 파일 로드 -->
+    <title>Document</title>
+</head>
+
+<style>
+    header {
+        text-align: center;
+    }
+
+    .rootContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    article {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 300px;
+        height: 300px;
+        border: 1px solid;
+        overflow: hidden;
+    }
+
+    .image-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        overflow: hidden;
+        border: 1px solid;
+        width: 100%;
+        height: 100%;
+    }
+
+    .image-container img {
+        flex: 1;
+        /* 이미지 간격을 조절 */
+        max-width: calc(30%);
+    }
+
+    .characterImg {
+        width: 100%;
+        height: 60%;
+    }
+
+    .inputContainer {
+        border: 1px solid;
+        flex-direction: column;
+        align-items: center;
+        width: 500px;
+    }
+
+    .inputBox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid;
+    }
+</style>
+
+
+<body>
+    <div id="app">
+
+        <div class="inputContainer">
+            <select v-model="type" name="" id="">
+                <option>인물등록</option>
+                <option>스킬등록</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, ref } = Vue;
+
+        createApp({
+            setup(){ // vue에서 초기데이터 설정
+                const type = ref();
+
+                return{
+                    type
+
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
