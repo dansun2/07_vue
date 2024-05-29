@@ -46,9 +46,28 @@
         <br>
         <label>주소 : </label><input v-model="address"/>
         <br>
-        <label>나이 : </label><input v-model="age"/>
+        <label>나이 : </label><input type="number" v-model.number="age"/>
         <br>
-        <label>자기소개 : </label><input v-model="introduce"/>
+        <label>자기소개 : </label><input v-model.trim ="introduce"/>
+    </div>
+
+    <div id="step03">
+        <p>vue에 대한 여러분의 생각을 입력해주세요 : {{message}}</p>
+        <textarea v-model="message"></textarea>
+        <br>
+        <p>느리게 반영되는 MSG : {{msg}}</p>
+        <textarea v-model.lazy="msg"></textarea>
+    </div>
+
+    <br>
+
+    <div id="stpe04">
+        <p>단일 선택 : {{selected}}</p>
+        <select v-model="selected" @change="check">
+            <option value="apple">apple</option>
+            <option value="pineapple">pineapple</option>
+            <option value="grape">grape</option>
+        </select>
     </div>
 
     <script>
@@ -86,6 +105,35 @@
             }
 
         }).mount("#step02");
+
+        createApp({
+            setup(){
+                const message = ref("");
+                const msg = ref("");
+                return {message,msg}
+            }
+        }).mount("#step03");
+
+        createApp({
+            setup(){
+                const selected = ref("apple");
+                const fruits = ref();
+
+                const check = ()=>{
+                    console.log(selected.value);
+                }
+                
+                function check(){
+                    
+                }
+
+                return{
+                    selected,
+                    fruits,
+                    check
+                }
+            }
+        }).mount("#step04");
     </script>
 </body>
 </html>
