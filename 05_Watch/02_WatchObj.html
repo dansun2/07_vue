@@ -13,6 +13,38 @@
 
     <script>
         const {ref, watch, createApp, reactive} = Vue;
+        
+        createApp ({
+            setup(){
+                const obj = reactive({
+                    sum : 0,
+                    x : 0,
+                    y : 0
+                });
+
+                const obj2 = reactive({
+                    sum : 0,
+                    x : 0,
+                    y : 0
+                });
+
+                watch(
+                    ()=>{
+                        return [obj2.x, obj2.y];
+                    },
+                    (newVal, oldVal)=>{
+                        console.log(newVal);
+                        console.log(oldVal);
+                        obj2.sum = newVal[0] + newVal[1];
+                    }
+                );
+
+                return {
+                    obj,
+                    obj2
+                }
+            }
+        }).mount("#step01");
     </script>
 </body>
 </html>
