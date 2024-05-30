@@ -29,6 +29,7 @@
         <input v-model="currentValue"/>
     </div>
 
+
     <!--
         watch의 다중 인수
         여러 반응서 변수를 감지하기 위해서 다음과 같이 배열로 묶어 여러 상태 변화를 감지할 수 있다.
@@ -50,6 +51,26 @@
         <p>{{z}}</p>
         <button @click="z++">z++</button>
     </div>
+
+
+      <!-- 
+        watch의 다중 인수
+        여러 반응성 변수의 변화를 감지하여 로직을 수행하고 return을 하면 callback 함수에 매개변수로 전달할 수 있다.
+        이러한 경우 반응성 변수의 상태를 객체 형식으로 전달하기 때문에 getter를 이용하여 접근해야 한다. 
+        EX) x.value + y.value
+        [표현식]
+        watch(()=>{}, callback(sum)=>{
+            1. ()=>{} : 상태 변화를 감지할 속성 및 로직
+            2. callback(sum)=>{} : 앞선 로직을 수행하고 리턴 값을 매개변수로 전달받아 로직을 수행한다.
+
+            변경 감지 시 수행할 동작
+        })
+     -->
+     <div id="step03">
+        <p>{{sum}}</p>
+        <button @click="x++">x++</button>
+        <button @click="y++">y++</button>
+     </div>
 
     <script>
         const { createApp, watch, ref, reactive } = Vue; //구조분해할당
@@ -96,6 +117,25 @@
                 }
             }
         }).mount("#step01");
+
+        createApp({
+            setup(){
+                const x = ref(0);
+                const y = ref(0);
+                const z = ref(0);
+
+                watch([x,y], (newVal, oldVal)=> {
+                    console.log("new : " + newVal);
+                    console.log("old : " + oldVal);
+                })
+
+                return {
+                    x,
+                    y,
+                    z
+                }
+            }
+        }).mount("#step02");
 
     </script>
 </body>
