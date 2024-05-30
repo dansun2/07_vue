@@ -183,10 +183,10 @@
                 });
 
                 watch(()=> {
-                    return
+                    return obj.x + obj.y;
                 },
                 (result, second)=> {
-                    console.log(result);
+                    obj.sum=result;
                     console.log(second);
                 });
 
