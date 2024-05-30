@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+    <style>
+        .todoCard{
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+    <div id="step01">
+        <h1>watch</h1>
+        <template v-for="todo in todos">
+            <div :key="todo.id" class="todoCard">
+                <h5>{{todo.title}}</h5>
+                <p>complated : {{todo.complated}}</p>
+            </div>
+        </template>
+    </div>
+
+    <script>
+        const { ref, watch, createApp, watchEffect } = Vue;
+    </script>
+</body>
+</html>

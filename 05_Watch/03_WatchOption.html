@@ -21,6 +21,20 @@
         <button @click="num++">num++</button>
     </div>
     
+
+    <!--  
+        once
+        트리거를 설정한 반응성 변수의 상태가 변하면 한번만 호출되도록 하는 옵션이다.
+    -->
+    <div id="step02">
+        <p>
+            {{num}}
+        </p>
+
+        <button @click="num++">num++</button>
+    </div>
+
+
     <script>
         const {ref, watch, createApp} = Vue;
 
@@ -42,6 +56,25 @@
                 }
             }
         }).mount("#step01");
+
+        createApp ({
+            setup(){
+                const num = ref(0);
+
+                watch(
+                    num,
+                    (newVal, oldVal)=>{
+                        console.log("newVal : " + newVal);
+                        console.log("oldVal : " + oldVal);
+                    },
+                    {once : true}
+                )
+
+                return{
+                    num
+                }
+            }
+        }).mount("#step02");
     </script>
 </body>
 </html>
