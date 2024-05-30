@@ -24,7 +24,9 @@
         })
     -->
     <div id="stpe01">
-        {{data}}
+        <p>현재 값 : {{currentValue}}</p>
+        <p>이전 값 : {{previousValue}}</p>
+        <input v-model="currentValue"/>
     </div>
 
     <script>
