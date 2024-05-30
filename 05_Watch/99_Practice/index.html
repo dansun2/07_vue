@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <!--이모지로 변경할 번호 입력받기-->
+    <div id="app">
+        <input v-model="label" type="text" placeholder="이모지 번호를 입력하세요."/>
+    </div>
+
+    <script>
+        const { createApp, ref, reactive, watch, watchEffect } = Vue;
+
+        createApp({
+            setup() {
+                // input의 값을 입력기 위함
+                const label = ref("");
+                // 이미지를 보여주기 위함
+                const emoji = ref("");
+                // image 목록을 받아오기 위함
+                let emojis = reactive({});
+
+                label.value = emojis;
+
+                // 초기 데이터 목록을 받아오기 위함
+                // 이렇게 안해도 상관없으나 오늘 복습을 위함
+                watchEffect(async () => {
+                    emojis = await fetch(`https://api.github.com/emojis`)
+                        .then(response => response.json())
+                        .then(data => data);
+                    console.log(emojis[100]);
+                });
+                
+                return {
+                    label,
+                    emoji,
+                    emojis
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
