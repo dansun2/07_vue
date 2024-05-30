@@ -28,9 +28,18 @@
         <button @click="obj2.y++">y++</button>
     </div>
 
+    <!--
+        deep watch
+        watch 함수에서 사용되는 옵션 중 하나로 옵션을 설정하면 객체의 중첩된 속성에 대한 변경도 감지할 수 있다.
+        즉 객체 내부의 하위 속성이 변경될 때 watch 콜백이 실행되게 만들 수 있다.
+        그러나 감시 대상의 모든 중첩 속성을 순회하는 방식으로 동작되어 큰 데이터 구조에 사용할 경우 비용이 많이 든다.
+    -->
     <div id="step02">
         <p>Value : {{state.value}}</p>
         <button @click="state.value++">{{state.value}} value</button>
+
+        <p>Value : {{state.nestedObject.nestedValue}}</p>
+        <button @click="state.nestedObject.nestedValue++">{{state.nestedObject.nestedValue}}state.nestedObject.nestedValue</button>
     </div>
 
     <script>
@@ -75,28 +84,32 @@
             }
         }).mount("#step01");
 
+        
         createApp({
-            setup(){
+            setup() {
+
                 const state = reactive({
                     value: 1,
-                    nestedObject:{
-                        nestedValue :2
+                    nestedObject: {
+                        nestedValue: 2
                     }
                 });
-
                 watch(
-                    ()=>state, // return이 생략됨
-                    (newValue, oldValue)=>{
-                        console.log("object Changed!");
-                        console.log("newValue", newValue);
-                        console.log("oldValue", oldValue);
-                    }
-                )
+                    () => state,
+                    (newValue, oldValue) => {
+                        console.log('Object changed!');
+                        console.log('New Value:', newValue);
+                        console.log('Old Value:', oldValue);
+                    },
+                    // 아래의 옵션을 제거하면 객체 상태 변화를 감지할 수 없음
+                    { deep: true }
+                );
+
                 return {
                     state
                 }
             }
-        }).mount("#step02");
+        }).mount("#step02")
     </script>
 </body>
 </html>
