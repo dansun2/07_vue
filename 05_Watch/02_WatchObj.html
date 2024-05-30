@@ -7,18 +7,40 @@
     <title>Document</title>
 </head>
 <body>
+    <!--
+        watch obj
+        watch 함수를 사용하여 반응성 객체를 감시할 때, vue는 객체의 내부 변경을 감지하고
+        해당 변경을 적절한 시점에 처리한다.
+        이 때 vue는 객체 전체를 새로 생성하는 것이 아니라 내부 속성의 변경을 감지하여 동일한 객체로 반환한다.
+        따라서 newValue와 oldValue는 내부적으로 동일한 객체를 참조하게 된다.
+        이러한 이유로 newValue와 oldValue는 동일한 값을 가지게 된다.
+        newValue와 oldValue는 같은 객체의 주소를 참조
+    -->
     <div id="step01">
+        <p>
+            obj: {{obj.sum}}
+        </p>
+        <button @click="obj.x++">x++</button>
+        <button @click="obj.y++">y++</button>
 
+        <p>obj2 : {{obj2.sum}}</p>
+        <button @click="obj2.x++">x++</button>
+        <button @click="obj2.y++">y++</button>
+    </div>
+
+    <div id="step02">
+        <p>Value : {{state.value}}</p>
+        <button @click="state.value++">{{state.value}} value</button>
     </div>
 
     <script>
         const {ref, watch, createApp, reactive} = Vue;
-        
-        createApp ({
+
+        createApp({
             setup(){
                 const obj = reactive({
                     sum : 0,
-                    x : 0,
+                    x :0,
                     y : 0
                 });
 
@@ -28,11 +50,18 @@
                     y : 0
                 });
 
+                watch(obj, (newVal, oldVal)=>{
+                    console.log("new : "+ newVal.x);
+                    console.log("old : " + oldVal.x);
+                    obj.sum = newVal.x + newVal.y;
+                })
+
+
                 watch(
-                    ()=>{
+                    () =>{
                         return [obj2.x, obj2.y];
                     },
-                    (newVal, oldVal)=>{
+                    (newVal, oldVal) =>{
                         console.log(newVal);
                         console.log(oldVal);
                         obj2.sum = newVal[0] + newVal[1];
@@ -45,6 +74,29 @@
                 }
             }
         }).mount("#step01");
+
+        createApp({
+            setup(){
+                const state = reactive({
+                    value: 1,
+                    nestedObject:{
+                        nestedValue :2
+                    }
+                });
+
+                watch(
+                    ()=>state, // return이 생략됨
+                    (newValue, oldValue)=>{
+                        console.log("object Changed!");
+                        console.log("newValue", newValue);
+                        console.log("oldValue", oldValue);
+                    }
+                )
+                return {
+                    state
+                }
+            }
+        }).mount("#step02");
     </script>
 </body>
 </html>
