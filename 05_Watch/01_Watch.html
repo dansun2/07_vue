@@ -7,8 +7,23 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <title>Document</title>
 </head>
-    <div id="stpe01"></div>
+    
 <body>
+    <!--
+        watch
+        데이터의 변경을 감지하고 그에 따라 특정 동작을 수행하는 훅스이다.
+        watch는 vue 인스턴스가 생성되고 setup 함수 내부에서 사용된다.
+
+        [표현식]
+        watch(propertyName, callback(newValue, oldValue) =>{
+            1. propertyName : 변경을 감지할 속성
+            2. newValue : 현재 입력된 새로운 값
+            3. oldValue : 입력 이전의 값
+
+            변경 감지 시 수행할 동작
+        })
+    -->
+    <div id="stpe01"></div>
     <script>
         const { createApp, watch, ref, reactive } = Vue; //구조분해할당
 
