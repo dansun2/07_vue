@@ -29,6 +29,15 @@
         <input v-model="currentValue"/>
     </div>
 
+    <div id="step02">
+        <p>{{x}}</p>
+        <button @click="x++">x++</button>
+        <p>{{y}}</p>
+        <button @click="y++">y++</button>
+        <p>{{z}}</p>
+        <button @click="z++">z++</button>
+    </div>
+
     <script>
         const { createApp, watch, ref, reactive } = Vue; //구조분해할당
 
@@ -36,14 +45,35 @@
             setup(){
                 const currentValue = ref("");
                 const previousValue = ref("");
+                
+                // 동기 함수 예제
+                watch(currentValue, async(newVal, oldVal) =>{
+                    // 외부 API 호출 
+                    // let test = fetch("https://api.sampleapis.com/wines/reds")
+                                    //  .then(response => response.json());
+                    // 아래의 값은 promise가 반환됨
+                    // console.log(test);
+                    /*
+                        Promise는 자바스크립트에서 비동기 작업을 관리하고 처리하기 위해 사용되는 객체입니다
+                        Promise는 resolve(성공시) reject(실패시) 메서드를 갖는다.
+                        만약 Promise 블록상위 스코프에서 await를 하지 않는다면 반환 값은 Promise가 된다.
+                    */  
+                    
 
-                watch(currentValue, async(newVal, oldVal) => {
+                    // let test = await fetch("https://api.sampleapis.com/wines/reds")
+                    //                 .then(response => response.json());
+                    // console.log(test);
+
                     if(newVal !== previousValue.value){
                         console.log(newVal);
                         console.log(oldVal);
-                        console.log("Watch === 데이터 변경 후 로직 실행");
-
-                        previousValue.value = oldVal;
+                        console.log("Watch === 데이터 변경 후 로직 실행")
+                        if(newVal == "서울"){
+                            previousValue.value = "관악구";
+                        }
+                        else if(newVal == "부산"){
+                            previousValue.value = "중구";
+                        }
                     }
                 });
 
@@ -52,10 +82,8 @@
                     previousValue
                 }
             }
-            
-        }).mount("#stpe01");
+        }).mount("#step01");
 
     </script>
 </body>
-
 </html>
