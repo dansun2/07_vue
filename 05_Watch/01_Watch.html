@@ -68,8 +68,14 @@
      -->
      <div id="step03">
         <p>{{sum}}</p>
-        <button @click="x++">x++</button>
-        <button @click="y++">y++</button>
+        <button @click="x++">{{x}}</button>
+        <button @click="y++">{{y}}</button>
+     </div>
+
+     <div id="step04">
+        <p>{{obj.sum}}</p>
+        <button @click="obj.x++">{{obj.x}}</button>
+        <button @click="obj.y++">{{obj.y}}</button>
      </div>
 
     <script>
@@ -137,6 +143,59 @@
             }
         }).mount("#step02");
 
+        createApp({
+            setup(){
+                const x = ref(0);
+                const y = ref(0);
+                const sum = ref(0);
+
+                watch(
+                    ()=>{
+                        return x.value + y.value;
+
+                        // console.log("df");
+                        // console.log(x.value);
+                        // console.log(y.value);
+                    },
+                    (result)=>{
+                        sum.value = result;
+                    }
+                    // (newVal, oldVal)=> {
+                    // console.log("x : " + newVal[0]);
+                    // console.log("y : " + newVal[1]);
+                    // console.log("old : " + oldVal);
+                );
+
+                return {
+                    x,
+                    y,
+                    sum
+                }
+            }
+        }).mount("#step03");
+
+        createApp({
+            setup(){
+                const obj = reactive({
+                    sum : 0,
+                    x : 0,
+                    y : 0
+                });
+
+                watch(()=> {
+                    return
+                },
+                (result, second)=> {
+                    console.log(result);
+                    console.log(second);
+                });
+
+                return {
+                    obj
+                }
+                
+            }
+        }).mount("#step04");
     </script>
 </body>
 </html>
