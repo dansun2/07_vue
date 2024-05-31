@@ -12,7 +12,21 @@ const obj = reactive({
 <template>
     <div class="container">
         <h1>NamedSlot</h1>
-        <NameChild></NameChild>
+        <NameChild>
+            <template v-slot:name>
+                <h2>
+                    name:{{ obj.name }}
+                </h2>
+            </template>
+
+            <template #founder>
+                <p>founder : {{ obj.founder }}</p>
+            </template>
+
+            <template v-slot:img>
+                <img :src="obj.img" alt="image"/>
+            </template>
+        </NameChild>
     </div>
 
 </template>
