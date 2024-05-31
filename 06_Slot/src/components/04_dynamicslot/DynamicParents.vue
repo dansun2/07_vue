@@ -1,6 +1,6 @@
 <script setup>
     import {ref} from 'vue';
-
+    import DynamicChild from './DynamicChild.vue';
     
     const dynamicName = ref("name");
 </script>
