@@ -1,5 +1,6 @@
 <script setup>
 import { reactive } from 'vue';
+import NameChild from './NamedChild.vue';
 
 const obj = reactive({
     name : "vue",
@@ -9,6 +10,10 @@ const obj = reactive({
 </script>
 
 <template>
+    <div class="container">
+        <h1>NamedSlot</h1>
+        <NameChild></NameChild>
+    </div>
 
 </template>
 
