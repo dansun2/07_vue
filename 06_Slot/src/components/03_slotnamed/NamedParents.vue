@@ -7,3 +7,21 @@ const obj = reactive({
     img: "https://images.ctfassets.net/s5uo95nf6njh/2fEr6ctL9FxPtOPhUcM4FA/773007e573bfa16aebdb736f767b45fa/evan-you-hero.jpg"
 });
 </script>
+
+<template>
+
+</template>
+
+<style scoped>
+    .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid;
+    }
+
+    img{
+        width: 200px;
+        height: 200px;
+    }
+</style>
