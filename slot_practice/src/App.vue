@@ -6,16 +6,8 @@
 </script>
 
 <template>
-    <div>
-        <h1>component Container</h1>
-        <MyComponent/>
-    </div>
-
     <main>
-        <Parents/>
-        <div class="test">
-          <NamedParents/>
-        </div>
+
         <DynamicParents/>
       
     </main>
