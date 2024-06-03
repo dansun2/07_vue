@@ -3,9 +3,6 @@
 
     const propsCount = inject("count");
 
-    updated(){
-        console.log("grandson update");
-    }
 </script>
 
 <template>

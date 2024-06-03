@@ -1,7 +1,9 @@
 <script setup>
-    import { provide, ref } from 'vue';
+    import { provide, ref, onUpdated } from 'vue';
     import Child from "./DrillingChild.vue";
-
+    onUpdated(()=>{
+        console.log("ddd")
+    })
     const count = ref(0);
     provide('count', count);
 </script>
