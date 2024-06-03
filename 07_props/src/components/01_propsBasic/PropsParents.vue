@@ -1,5 +1,5 @@
 <script setup>
-    import { provide, ref } from "vue";
+    import { provide, ref, readonly } from "vue";
     import PropsChild from "./PropsChild.vue";
     import DarkMode from "./DarkMode.vue";
     import ReadProps from "./ReadProps.vue";
