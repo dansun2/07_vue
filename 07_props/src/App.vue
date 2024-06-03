@@ -1,15 +1,12 @@
 <script setup>
+  import PropsParents from "./components/01_propsBasic/PropsParents.vue";
 
 </script>
 
 <template>
-  <header>
-
-  </header>
-
-  <main>
-
-  </main>
+  <div>
+    <PropsParents/>
+  </div>
 </template>
 
 <style scoped>
