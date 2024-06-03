@@ -2,9 +2,11 @@
     import { provide, ref } from "vue";
     import PropsChild from "./PropsChild.vue";
     import DarkMode from "./DarkMode.vue";
+    import ReadProps from "./ReadProps.vue";
     
     const message = ref("hello");
     const darkState = ref(false);
+    const readValue = ref("vue는 재미있다.");
     
     function darkMode() {
         darkState.value = !darkState.value;
@@ -12,7 +14,9 @@
 
     // 공급자
     provide("data",{ message, darkMode });
+    provide("darkMode", darkMode);
     provide("darkState", darkState);
+    provide("readValue", readonly(readValue));
 </script>
 <!--
     props
@@ -28,6 +32,7 @@
     <PropsChild/>
     <br>
     <DarkMode/>
+    <ReadProps/>
 </template>
 
 <style scoped>
