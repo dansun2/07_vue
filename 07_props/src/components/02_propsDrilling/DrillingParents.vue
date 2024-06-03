@@ -1,5 +1,6 @@
 <script setup>
     import { provide, ref } from 'vue';
+    import Child from "./DrillingChild.vue";
 
     const count = ref(0);
     provide('count', count);
