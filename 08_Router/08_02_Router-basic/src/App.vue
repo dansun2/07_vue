@@ -1,5 +1,9 @@
 <script setup>
   import { RouterLink, RouterView } from 'vue-router';
+  import {ref, onUpdated} from 'vue';
+
+  const pathValue = ref(0);
+  
 </script>
 
 <template>
@@ -9,11 +13,14 @@
       <h2> basic Router</h2>
       <nav>
         <RouterLink to="/" replace active-class="active">Home</RouterLink>
-
+        <RouterLink :to="/pathvariable/1" replace active-class="active">pathVariable</RouterLink>
       </nav>
-
     </div>
   </header>
+
+  <main>
+    <RouterView/>
+  </main>
 </template>
 
 
