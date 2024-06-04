@@ -3,18 +3,23 @@
   import {ref, onUpdated} from 'vue';
 
   const pathValue = ref(0);
-  
 </script>
 
 <template>
   <header>
     <h1>Router 사용하기</h1>
     <div class="wrapper">
-      <h2> basic Router</h2>
+      <!-- <h2> basic Router</h2>
       <nav>
         <RouterLink to="/" replace active-class="active">Home</RouterLink>
         <RouterLink to="/pathvariable/1" replace active-class="active">pathVariable</RouterLink>
         <RouterLink to="/querystring?name=홍길동&age=20" replace active-class="active">querystring</RouterLink>
+      </nav> -->
+      <h2>nestedRouter</h2>
+      <nav>
+        <RouterLink to="/" replace active-class="active">Home</RouterLink>
+        <RouterLink to="/nested">중첩 인덱스</RouterLink>
+        <RouterLink to="/nested/view">중첩 라우터</RouterLink>
       </nav>
     </div>
   </header>
