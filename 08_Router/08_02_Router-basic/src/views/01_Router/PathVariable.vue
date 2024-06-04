@@ -12,3 +12,7 @@ onMounted(()=>{
 <template>
     <h1>pathVariable : {{ $route.params.id }}</h1>
 </template>
+
+<style scoped>
+  
+</style>

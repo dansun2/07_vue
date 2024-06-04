@@ -1,8 +1,6 @@
 <script setup>
   import { RouterLink, RouterView } from 'vue-router';
-  import {ref, onUpdated} from 'vue';
 
-  const pathValue = ref(0);
 </script>
 
 <template>
