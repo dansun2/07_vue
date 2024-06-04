@@ -13,7 +13,8 @@
       <h2> basic Router</h2>
       <nav>
         <RouterLink to="/" replace active-class="active">Home</RouterLink>
-        <RouterLink :to="/pathvariable/1" replace active-class="active">pathVariable</RouterLink>
+        <RouterLink to="/pathvariable/1" replace active-class="active">pathVariable</RouterLink>
+        <RouterLink to="/querystring?name=홍길동&age=20" replace active-class="active">querystring</RouterLink>
       </nav>
     </div>
   </header>

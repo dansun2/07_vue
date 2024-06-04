@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/views/01_Router/HomeView.vue";
+import QueryString from "../views/01_Router/QueryString.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +17,11 @@ const router = createRouter({
             path: '/pathvariable/:id',
             name : 'path',
             component : ()=> import('../views/01_Router/PathVariable.vue')
+        },
+        {
+            path: "/querystring",
+            name: "query",
+            component: QueryString
         }
     ]
 });
